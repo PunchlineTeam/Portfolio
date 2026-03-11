@@ -185,6 +185,9 @@ function setLanguage(lang) {
     const key = el.getAttribute("data-i18n");
     if (translations[lang][key]) {
       el.textContent = translations[lang][key];
+      if (el.hasAttribute("data-text")) {
+        el.setAttribute("data-text", translations[lang][key]);
+      }
     }
   });
   // Update dynamic about text with real numbers
