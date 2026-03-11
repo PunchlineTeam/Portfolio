@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Punchline Team — Roblox Game Studio</title>
+  <meta name="description" content="We create hit Roblox games played by billions. View our portfolio." />
+  <link rel="icon" type="image/png" href="materials/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <img class="logo-icon" src="materials/logo.png" alt="Punchline" />
+        <span>Punchline Team</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#about" class="nav-link" data-i18n="navAbout">О нас</a>
+        <a href="#portfolio" class="nav-link" data-i18n="navPortfolio">Портфолио</a>
+        <a href="#contact" class="nav-link" data-i18n="navContact">Контакты</a>
+      </div>
+      <div class="nav-right">
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="ru">RU</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-gradient"></div>
+      <div class="hero-grid"></div>
+      <div class="floating-orb orb-1"></div>
+      <div class="floating-orb orb-2"></div>
+      <div class="floating-orb orb-3"></div>
+    </div>
+    <div class="container hero-content">
+      <h1 class="hero-title" data-animate="fade-up">
+        <span data-i18n="heroTitle1">Создаём хиты</span><br />
+        <span class="gradient-text" data-i18n="heroTitle2" data-text="в Roblox">в Roblox</span>
+      </h1>
+      <p class="hero-subtitle" data-animate="fade-up" data-delay="200">
+        <span class="hero-stat-inline" id="heroVisits">1.1B+</span>
+        <span data-i18n="heroVisitsLabel">посещений</span> &middot;
+        <span class="hero-stat-inline" id="heroGames">47</span>
+        <span data-i18n="heroGamesLabel">игр</span> &middot;
+        <span class="hero-stat-inline" id="heroPlaying">4K+</span>
+        <span data-i18n="heroPlayingLabel">онлайн</span>
+      </p>
+      <div class="hero-ctas" data-animate="fade-up" data-delay="300">
+        <a href="#portfolio" class="btn btn-primary">
+          <span data-i18n="heroCtaPrimary">Наши игры</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-outline">
+          <span data-i18n="heroCtaSecondary">Связаться</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content" data-animate="fade-right">
+          <span class="section-tag" data-i18n="aboutTag">О нас</span>
+          <h2 class="section-title" data-i18n="aboutTitle">О нас</h2>
+          <p class="about-text" data-i18n="aboutText1">Мы — команда разработчиков, создающая популярные игры на платформе Roblox. Наши проекты объединены под несколькими студиями и суммарно набрали более 1 миллиарда визитов.</p>
+          <p class="about-text" data-i18n="aboutText2">Каждый наш проект создаётся с вниманием к деталям, уникальным геймплеем и высоким качеством.</p>
+        </div>
+        <div class="about-image" data-animate="fade-left">
+          <img src="materials/logo.png" alt="Punchline Logo" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats" id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card" data-animate="fade-up">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div class="stat-value" data-count-target="" id="statVisits">0</div>
+          <div class="stat-label" data-i18n="statVisits">Визитов</div>
+        </div>
+        <div class="stat-card" data-animate="fade-up" data-delay="100">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+          <div class="stat-value" data-count-target="" id="statGames">0</div>
+          <div class="stat-label" data-i18n="statGames">Игр создано</div>
+        </div>
+        <div class="stat-card" data-animate="fade-up" data-delay="200">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
+          </div>
+          <div class="stat-value" data-count-target="14" id="statGroups">0</div>
+          <div class="stat-label" data-i18n="statGroups">Студий</div>
+        </div>
+        <div class="stat-card" data-animate="fade-up" data-delay="300">
+          <div class="stat-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v6"/></svg>
+          </div>
+          <div class="stat-value" data-count-target="" id="statPlaying">0</div>
+          <div class="stat-label" data-i18n="statPlaying">Играют сейчас</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-header" data-animate="fade-up">
+        <span class="section-tag" data-i18n="portfolioTag">Наши работы</span>
+        <h2 class="section-title" data-i18n="portfolioTitle">Портфолио</h2>
+        <p class="section-desc" data-i18n="portfolioDesc">Игры, в которые играют миллионы на платформе Roblox</p>
+      </div>
+      <div class="games-grid" id="gamesGrid">
+        <!-- Filled by JS -->
+      </div>
+      <div class="portfolio-more" id="portfolioMore" data-animate="fade-up">
+        <button class="btn btn-outline" id="showAllBtn">
+          <span data-i18n="showAll">Показать все</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / CTA -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-card" data-animate="fade-up">
+        <div class="contact-glow"></div>
+        <h2 class="contact-title" data-i18n="contactTitle">Готовы к сотрудничеству?</h2>
+        <p class="contact-desc" data-i18n="contactDesc">Свяжитесь с нами для обсуждения проектов, коллабораций или любых вопросов о наших играх.</p>
+        <a href="https://discord.gg/HREvzvTR9T" class="btn btn-primary btn-lg">
+          <span data-i18n="contactCta">Discrod канал</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="nav-logo">
+            <img class="logo-icon" src="materials/logo.png" alt="Punchline" />
+            <span>Punchline Team</span>
+          </a>
+          <p class="footer-desc" data-i18n="footerDesc">Roblox-студия, создающая игры, в которые играют миллионы.</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading" data-i18n="footerNav">Навигация</h4>
+          <a href="#about" data-i18n="navAbout">О нас</a>
+          <a href="#portfolio" data-i18n="navPortfolio">Портфолио</a>
+        </div>
+        <div class="footer-col">
+  <h4 class="footer-heading" data-i18n="footerContact">Контакты</h4>
+  
+  <a href="#" id="copyDiscord" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 8px;">
+  <i class="fa-brands fa-discord" style="color: #ffffff; font-size: 24px;"></i>
+  <span>punchline_team</span>
+</a>
+
+  <a href="https://discord.gg/HREvzvTR9T" target="_blank" rel="noopener" style="display: flex; align-items: center; gap: 8px;">
+    <i class="fa-brands fa-discord" style="color: #5865F2; font-size: 24px;"></i>
+    <span>Discord Group</span>
+  </a>
+</div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="footerYear">2026</span> Punchline Team. <span data-i18n="footerRights">Все права защищены.</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="customCursor">
+    <span class="cursor-text"></span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

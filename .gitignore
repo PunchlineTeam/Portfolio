@@ -1,0 +1,4 @@
+node_modules/
+.claude/
+server.js
+fetch-data.js
