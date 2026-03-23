@@ -82,6 +82,7 @@ const translations = {
     heroCtaSecondary: "Связаться",
     heroPlatform: "Доступно на",
     statVisits: "Посещений",
+    statMembers: "Участников",
     statGames: "Игр создано",
     statGroups: "Групп",
     statPlaying: "Играют сейчас",
@@ -122,6 +123,7 @@ const translations = {
     heroCtaSecondary: "Contact Us",
     heroPlatform: "Available on",
     statVisits: "Total Visits",
+    statMembers: "Members",
     statGames: "Games Created",
     statGroups: "Communities",
     statPlaying: "Playing Now",
@@ -282,10 +284,12 @@ function initCountUp() {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const statVisits = document.getElementById("statVisits");
+          const statMembers = document.getElementById("statMembers");
           const statGames = document.getElementById("statGames");
           const statGroups = document.getElementById("statGroups");
           const statPlaying = document.getElementById("statPlaying");
           animateCountUp(statVisits, gamesData.totalVisits);
+          animateCountUp(statMembers, gamesData.totalMembers);
           animateCountUp(statGames, gamesData.totalGames);
           animateCountUp(statGroups, gamesData.totalGroups);
           animateCountUp(statPlaying, gamesData.totalPlaying);
