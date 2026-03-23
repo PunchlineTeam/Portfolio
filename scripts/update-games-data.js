@@ -150,9 +150,24 @@ async function main() {
   // Sort by visits descending
   games.sort((a, b) => b.visits - a.visits);
 
+  // Fetch member counts for all groups
+  console.log("Fetching group member counts...");
+  let totalMembers = 0;
+  for (const group of GROUPS) {
+    try {
+      const info = await fetch(`https://groups.roblox.com/v1/groups/${group.id}`);
+      totalMembers += info.memberCount || 0;
+    } catch (e) {
+      console.error(`    Error fetching members for ${group.name}: ${e.message}`);
+    }
+    await sleep(300);
+  }
+  console.log(`Total members across all groups: ${totalMembers}`);
+
   const output = {
     totalVisits,
     totalPlaying,
+    totalMembers,
     totalGames: games.length,
     totalGroups: GROUPS.length,
     games,

@@ -77,6 +77,7 @@ const translations = {
     heroVisitsLabel: "посещений",
     heroGamesLabel: "игр",
     heroPlayingLabel: "онлайн",
+    heroMembersLabel: "участников",
     heroCtaPrimary: "Наши игры",
     heroCtaSecondary: "Связаться",
     heroPlatform: "Доступно на",
@@ -116,6 +117,7 @@ const translations = {
     heroVisitsLabel: "visits",
     heroGamesLabel: "games",
     heroPlayingLabel: "online",
+    heroMembersLabel: "members",
     heroCtaPrimary: "Our Games",
     heroCtaSecondary: "Contact Us",
     heroPlatform: "Available on",
@@ -401,6 +403,9 @@ function updateHeroStats() {
   document.getElementById("heroVisits").textContent = formatNumber(gamesData.totalVisits);
   document.getElementById("heroGames").textContent = String(gamesData.totalGames);
   document.getElementById("heroPlaying").textContent = formatNumber(gamesData.totalPlaying);
+  if (gamesData.totalMembers) {
+    document.getElementById("heroMembers").textContent = formatNumber(gamesData.totalMembers);
+  }
 }
 
 /* ===== FOOTER YEAR ===== */
