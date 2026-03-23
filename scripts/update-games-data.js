@@ -123,7 +123,7 @@ async function main() {
   let totalVisits = 0;
   let totalPlaying = 0;
 
-  const MIN_VISITS = 100000; // Only show established games (100K+ visits)
+  const MIN_VISITS = 1000000; // Only show games with 1M+ visits
 
   for (const g of allGames) {
     const d = detailsMap[g.id];
