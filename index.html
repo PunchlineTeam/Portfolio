@@ -157,9 +157,9 @@
         <div class="contact-grid">
           <!-- Left: Form -->
           <div class="contact-form-side">
-            <span class="contact-tag" data-i18n="contactTag">ОСТАВИТЬ ЗАЯВКУ</span>
-            <h2 class="contact-title" data-i18n="contactTitle">Связаться с нами</h2>
-            <p class="contact-desc" data-i18n="contactDesc">Отправьте ссылку на игру и расскажите, чем мы можем помочь — трафик, монетизация, live ops или просто деньги. Мы изучим и скажем, что думаем.</p>
+            <span class="contact-tag" data-i18n="contactTag">ПРИСОЕДИНЯЙСЯ К КОМАНДЕ</span>
+            <h2 class="contact-title" data-i18n="contactTitle">Мы ищем таланты</h2>
+            <p class="contact-desc" data-i18n="contactDesc">Мы растём и ищем специалистов: программистов, 3D-артистов, аниматоров, GUI-дизайнеров, саунд-дизайнеров, VFX-художников и не только. Если ты крутой в своём деле — напиши нам.</p>
             <form id="contactForm" class="contact-form">
               <div class="form-row">
                 <div class="form-group">
@@ -167,12 +167,16 @@
                   <input type="text" name="name" placeholder="" data-i18n-placeholder="formNamePh" required>
                 </div>
                 <div class="form-group">
-                  <label data-i18n="formDiscord">Discord</label>
-                  <input type="text" name="discord" placeholder="" data-i18n-placeholder="formDiscordPh">
+                  <label data-i18n="formContact">Telegram / Email</label>
+                  <input type="text" name="contact" placeholder="" data-i18n-placeholder="formContactPh" required>
                 </div>
               </div>
               <div class="form-group">
-                <label data-i18n="formMessage">Сообщение</label>
+                <label data-i18n="formRole">Специализация</label>
+                <input type="text" name="role" placeholder="" data-i18n-placeholder="formRolePh" required>
+              </div>
+              <div class="form-group">
+                <label data-i18n="formMessage">О себе</label>
                 <textarea name="message" rows="4" placeholder="" data-i18n-placeholder="formMessagePh" required></textarea>
               </div>
               <button type="submit" class="btn btn-primary btn-lg contact-submit">
@@ -185,35 +189,35 @@
           </div>
           <!-- Right: What to expect -->
           <div class="contact-expect-side">
-            <span class="contact-tag" data-i18n="expectTag">ЧЕГО ОЖИДАТЬ</span>
-            <h2 class="contact-title" data-i18n="expectTitle">Честный разговор, реальное дело.</h2>
+            <span class="contact-tag" data-i18n="expectTag">КАК ЭТО РАБОТАЕТ</span>
+            <h2 class="contact-title" data-i18n="expectTitle">Простой и честный процесс.</h2>
             <div class="expect-steps">
               <div class="expect-step">
                 <span class="step-num">01</span>
                 <div>
-                  <h4 data-i18n="step1Title">Мы изучаем вашу игру</h4>
-                  <p data-i18n="step1Desc">DAU, ретеншн, потенциал монетизации — мы проверяем всё быстро. Обычно в течение 48 часов.</p>
+                  <h4 data-i18n="step1Title">Изучаем вашу заявку</h4>
+                  <p data-i18n="step1Desc">Смотрим портфолио, опыт и навыки. Обычно отвечаем в течение 48 часов.</p>
                 </div>
               </div>
               <div class="expect-step">
                 <span class="step-num">02</span>
                 <div>
-                  <h4 data-i18n="step2Title">Делимся мнением</h4>
-                  <p data-i18n="step2Desc">Вы получите чёткий разбор — что работает, что нет, и где точки роста.</p>
+                  <h4 data-i18n="step2Title">Тестовое задание</h4>
+                  <p data-i18n="step2Desc">Небольшая задача в вашей области, чтобы понять уровень и стиль работы.</p>
                 </div>
               </div>
               <div class="expect-step">
                 <span class="step-num">03</span>
                 <div>
-                  <h4 data-i18n="step3Title">Честный разговор</h4>
-                  <p data-i18n="step3Desc">Мы говорим прямо — что видим и есть ли совпадение интересов.</p>
+                  <h4 data-i18n="step3Title">Знакомство с командой</h4>
+                  <p data-i18n="step3Desc">Общаемся, обсуждаем проекты, отвечаем на ваши вопросы.</p>
                 </div>
               </div>
               <div class="expect-step">
                 <span class="step-num">04</span>
                 <div>
-                  <h4 data-i18n="step4Title">Структура партнёрства</h4>
-                  <p data-i18n="step4Desc">Если есть совпадение — мы предложим подходящие условия.</p>
+                  <h4 data-i18n="step4Title">Начало работы</h4>
+                  <p data-i18n="step4Desc">Если всё совпало — добро пожаловать в Punchline Team.</p>
                 </div>
               </div>
             </div>
