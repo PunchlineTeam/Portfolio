@@ -562,7 +562,7 @@ function initContactForm() {
       const res = await fetch("https://api.telegram.org/bot8795143865:AAHDkD6JwkrecMJC31J5GWU52fi1lz3Qjzo/sendMessage", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: 772073166, text, parse_mode: "HTML" }),
+        body: JSON.stringify({ chat_id: -5189423412, text, parse_mode: "HTML" }),
       });
       if (res.ok) {
         btn.textContent = translations[currentLang].formSuccess;
