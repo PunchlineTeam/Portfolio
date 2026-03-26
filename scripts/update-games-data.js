@@ -170,6 +170,26 @@ async function main() {
   }
   console.log(`Total members across all groups: ${totalMembers}`);
 
+  // Load existing data to preserve peakCCU records
+  const fs = require("fs");
+  const path = require("path");
+  const outPath = path.join(__dirname, "..", "games-data.json");
+  let existingPeaks = {};
+  try {
+    const existing = JSON.parse(fs.readFileSync(outPath, "utf8"));
+    for (const g of existing.games) {
+      if (g.peakCCU) existingPeaks[g.universeId] = g.peakCCU;
+    }
+  } catch (e) {
+    // No existing data, start fresh
+  }
+
+  // Set peakCCU: keep existing record if higher, otherwise use current playing
+  for (const game of games) {
+    const oldPeak = existingPeaks[game.universeId] || 0;
+    game.peakCCU = Math.max(oldPeak, game.playing);
+  }
+
   const output = {
     totalVisits,
     totalPlaying,
@@ -179,9 +199,6 @@ async function main() {
     games,
   };
 
-  const fs = require("fs");
-  const path = require("path");
-  const outPath = path.join(__dirname, "..", "games-data.json");
   fs.writeFileSync(outPath, JSON.stringify(output, null, 2) + "\n");
   console.log(`\nDone! ${games.length} games, ${totalVisits} total visits, ${totalPlaying} playing now`);
   console.log(`Written to ${outPath}`);
