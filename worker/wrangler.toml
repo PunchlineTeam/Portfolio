@@ -1,0 +1,12 @@
+name = "punchline-form-proxy"
+main = "telegram-proxy.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+# Telegram chat that receives applications.
+TELEGRAM_CHAT_ID = "-5189423412"
+# Lock the proxy to the site's origin (no path). Change if you use a custom domain.
+ALLOWED_ORIGIN = "https://punchlineteam.github.io"
+
+# TELEGRAM_BOT_TOKEN is NOT stored here — set it as a secret:
+#   wrangler secret put TELEGRAM_BOT_TOKEN

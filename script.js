@@ -556,6 +556,10 @@ async function init() {
   initContactForm();
 }
 
+// Form submissions go through a Cloudflare Worker that holds the Telegram bot
+// token server-side (see worker/). Paste your deployed Worker URL here.
+const FORM_ENDPOINT = "https://punchline-form-proxy.YOUR-SUBDOMAIN.workers.dev";
+
 function initContactForm() {
   const form = document.getElementById("contactForm");
   if (!form) return;
@@ -570,14 +574,13 @@ function initContactForm() {
     const contact = form.contact.value.trim();
     const role = form.role.value.trim();
     const message = form.message.value.trim();
-
-    const text = `📩 Новая заявка с сайта\n\n👤 Имя: ${name}\n📱 Контакт: ${contact}\n🎯 Специализация: ${role}\n\n📝 О себе:\n${message}`;
+    const website = form.website ? form.website.value : ""; // honeypot
 
     try {
-      const res = await fetch("https://api.telegram.org/bot8795143865:AAHDkD6JwkrecMJC31J5GWU52fi1lz3Qjzo/sendMessage", {
+      const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: -5189423412, text, parse_mode: "HTML" }),
+        body: JSON.stringify({ name, contact, role, message, website }),
       });
       if (res.ok) {
         btn.textContent = translations[currentLang].formSuccess;

@@ -9,15 +9,19 @@ on:
 permissions:
   contents: write
 
+# Opt into Node.js 24 now; GitHub forces it on 2026-06-02 and removes Node 20.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Fetch latest games data from Roblox API
         run: node scripts/update-games-data.js
