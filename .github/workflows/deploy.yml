@@ -3,6 +3,12 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [master]
+  # Also redeploy after the hourly data update finishes. Commits pushed by the
+  # github-actions bot don't trigger a `push` run (anti-recursion), so without this
+  # the deployed games-data.json would stay frozen at the last manual push.
+  workflow_run:
+    workflows: ["Update Games Data"]
+    types: [completed]
 
 permissions:
   contents: read

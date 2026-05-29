@@ -497,12 +497,25 @@ function initClipboard() {
 }
 /* ===== INIT ===== */
 async function init() {
-  // Load data
+  // Load data — pull the latest committed file straight from the repo so stats
+  // stay fresh on every visit. The hourly updater commits to master, but the
+  // GitHub Pages deploy can lag far behind (bot commits don't trigger a redeploy),
+  // so the deployed games-data.json may be stale. raw.githubusercontent.com always
+  // serves the newest commit and allows CORS. Fall back to the local copy if needed.
+  const RAW_DATA_URL =
+    "https://raw.githubusercontent.com/PunchlineTeam/Portfolio/master/games-data.json";
   try {
-    const res = await fetch("games-data.json?v=" + Date.now(), { cache: "no-store" });
+    const res = await fetch(RAW_DATA_URL + "?v=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
     gamesData = await res.json();
   } catch (e) {
-    console.error("Failed to load game data:", e);
+    console.warn("Falling back to local game data:", e);
+    try {
+      const res = await fetch("games-data.json?v=" + Date.now(), { cache: "no-store" });
+      gamesData = await res.json();
+    } catch (e2) {
+      console.error("Failed to load game data:", e2);
+    }
   }
 
   // Init language
