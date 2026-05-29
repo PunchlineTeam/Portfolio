@@ -558,7 +558,7 @@ async function init() {
 
 // Form submissions go through a Cloudflare Worker that holds the Telegram bot
 // token server-side (see worker/). Paste your deployed Worker URL here.
-const FORM_ENDPOINT = "https://punchline-form-proxy.YOUR-SUBDOMAIN.workers.dev";
+const FORM_ENDPOINT = "https://punchline-form-proxy.punchlineteam.workers.dev";
 
 function initContactForm() {
   const form = document.getElementById("contactForm");
