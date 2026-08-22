@@ -1,14 +1,14 @@
 {
-  "totalVisits": 1429826444,
-  "totalPlaying": 18153,
-  "totalMembers": 11244373,
+  "totalVisits": 1429938186,
+  "totalPlaying": 17664,
+  "totalMembers": 11234229,
   "totalGames": 42,
   "totalGroups": 14,
   "games": [
     {
       "name": "24 Hours in Elevator...",
-      "visits": 208705086,
-      "playing": 773,
+      "visits": 208711378,
+      "playing": 816,
       "groupName": "Punchline Lite",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-d0a27e0f29ea4c5f6aaaee87603fe02d/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/90842695067815",
@@ -17,8 +17,8 @@
     },
     {
       "name": "Chained Cars [2 Player Obby]",
-      "visits": 128228698,
-      "playing": 380,
+      "visits": 128233342,
+      "playing": 381,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-9ff94dbe26e343e90eba4bbf6bcef66e/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/128520572013466",
@@ -27,8 +27,8 @@
     },
     {
       "name": "Last To Leave Box Wins",
-      "visits": 122719282,
-      "playing": 356,
+      "visits": 122724532,
+      "playing": 346,
       "groupName": "Punchline Ultra",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-f3e9e3026c9d2790a4a7bd6e68c1db1c/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/113024290498796",
@@ -37,18 +37,18 @@
     },
     {
       "name": "Don't Break Obby",
-      "visits": 115765407,
-      "playing": 327,
+      "visits": 115769164,
+      "playing": 335,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-1ccf4e8e6ea8521073963432d9ae3bc2/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/137331625587953",
       "universeId": 6755261897,
-      "peakCCU": 327
+      "peakCCU": 335
     },
     {
       "name": "Build & Escape from Brainrot",
-      "visits": 92108109,
-      "playing": 1383,
+      "visits": 92118820,
+      "playing": 1135,
       "groupName": "Ultra Crabers",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-f4976e6ecfcada4b7d7860f9c3954c1b/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/99386843610967",
@@ -57,8 +57,8 @@
     },
     {
       "name": "100 Players Hole Survive",
-      "visits": 87373237,
-      "playing": 132,
+      "visits": 87375034,
+      "playing": 128,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-1f7322c065a80e56e167082631974138/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/126028172590189",
@@ -67,17 +67,17 @@
     },
     {
       "name": "Stretch A Friend [2 Player Obby]",
-      "visits": 69455556,
-      "playing": 434,
+      "visits": 69459360,
+      "playing": 496,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-4aa18beb46b55fcff72482194d3ec7dd/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/113816179306818",
       "universeId": 7481713061,
-      "peakCCU": 467
+      "peakCCU": 496
     },
     {
       "name": "Survive 100 Days in Prison",
-      "visits": 50380952,
+      "visits": 50380955,
       "playing": 0,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-844c248730108522332175ee3063e753/768/432/Image/Png/noFilter",
@@ -87,8 +87,8 @@
     },
     {
       "name": "BRUNO'S FAMILY PRISON RUN! (Obby)",
-      "visits": 49597498,
-      "playing": 37,
+      "visits": 49597765,
+      "playing": 40,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-e72088a8bf9113a37faabcbba28c05a3/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/15487207902",
@@ -97,8 +97,8 @@
     },
     {
       "name": "100 Players Impossible Maze",
-      "visits": 47466305,
-      "playing": 76,
+      "visits": 47466933,
+      "playing": 69,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-d8a13448da0b41fc9e949d0ff8157203/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/18652884352",
@@ -107,17 +107,17 @@
     },
     {
       "name": "Baby Roby Escape [Horror]",
-      "visits": 47076378,
-      "playing": 32,
+      "visits": 47076656,
+      "playing": 42,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-61c5f9a307234afa1da999be68f68270/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/14991442057",
       "universeId": 5163624693,
-      "peakCCU": 40
+      "peakCCU": 42
     },
     {
       "name": "100 Players Meme Maze",
-      "visits": 46828330,
+      "visits": 46829257,
       "playing": 134,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-09b58911837a59ae1afd035edaabb9af/768/432/Image/Png/noFilter",
@@ -127,18 +127,18 @@
     },
     {
       "name": "BABY POLLY HOUSE ESCAPE (Obby)",
-      "visits": 45739157,
-      "playing": 226,
+      "visits": 45740924,
+      "playing": 238,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-ea44186afab8b382c52d9f8a352f9fa0/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/14626736334",
       "universeId": 5045071892,
-      "peakCCU": 226
+      "peakCCU": 238
     },
     {
       "name": "Build Your Backrooms",
-      "visits": 38348304,
-      "playing": 11692,
+      "visits": 38403882,
+      "playing": 11301,
       "groupName": "Wind Sun Moon WSM",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-78c21503a0555cb57d411c2838f6e61a/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/134363641369914",
@@ -147,8 +147,8 @@
     },
     {
       "name": "Last To Leave Pool - Win",
-      "visits": 37471974,
-      "playing": 133,
+      "visits": 37473608,
+      "playing": 126,
       "groupName": "Punchline Ultra",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-d8afd27f4f76af42392f74a7c985f963/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/121364778216051",
@@ -157,8 +157,8 @@
     },
     {
       "name": "🖐Catch and Throw",
-      "visits": 25550729,
-      "playing": 638,
+      "visits": 25555862,
+      "playing": 610,
       "groupName": "Ultra Crabers",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-1b3da517b658367ac132ab4a96336c81/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/123138276715945",
@@ -167,7 +167,7 @@
     },
     {
       "name": "Last To Fall Asleep - Win",
-      "visits": 20138211,
+      "visits": 20139236,
       "playing": 127,
       "groupName": "Punchline Ultra",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-4d9d921359f15fdaf4efd19db6b2103e/768/432/Image/Png/noFilter",
@@ -177,8 +177,8 @@
     },
     {
       "name": "100 Players Color Maze",
-      "visits": 20104753,
-      "playing": 46,
+      "visits": 20105240,
+      "playing": 42,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-777a980620c860e27f354cc65fbc335b/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/84622620272650",
@@ -187,7 +187,7 @@
     },
     {
       "name": "100 Players Toilet Escape",
-      "visits": 18299436,
+      "visits": 18299437,
       "playing": 0,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-86a0c4b5437059d3586a4833390e56e5/768/432/Image/Png/noFilter",
@@ -197,8 +197,8 @@
     },
     {
       "name": "Face Your Fears Obby",
-      "visits": 18037767,
-      "playing": 35,
+      "visits": 18038180,
+      "playing": 33,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-f0c3397969c8dd4b8c8a7995473c4366/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/118726391635861",
@@ -217,8 +217,8 @@
     },
     {
       "name": "100 Players Enter Brainrot",
-      "visits": 16097558,
-      "playing": 20,
+      "visits": 16097697,
+      "playing": 16,
       "groupName": "Brain Trip Studio",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-b3213ca38a5461cfcb162e4ee4b2f47f/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/109919486211655",
@@ -227,17 +227,17 @@
     },
     {
       "name": "Escape Scary Teacher School",
-      "visits": 14451739,
-      "playing": 6,
+      "visits": 14451828,
+      "playing": 10,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-f08bdece050dacd8482f507b8197059c/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/17509115192",
       "universeId": 5992922703,
-      "peakCCU": 9
+      "peakCCU": 10
     },
     {
       "name": "Police Head Family Escape [Horror]",
-      "visits": 14207430,
+      "visits": 14207431,
       "playing": 0,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-87ddf068051159c4fc597ada8399703e/768/432/Image/Png/noFilter",
@@ -247,7 +247,7 @@
     },
     {
       "name": "Don't Touch Obby (Teamwork)",
-      "visits": 11769829,
+      "visits": 11769836,
       "playing": 0,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-60c29aaa81b5128a25f3af4df2ca78d3/768/432/Image/Png/noFilter",
@@ -257,18 +257,18 @@
     },
     {
       "name": "Build to Become Sniper",
-      "visits": 10808020,
-      "playing": 209,
+      "visits": 10808878,
+      "playing": 243,
       "groupName": "Brain Trip Studio",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-6b24cd8bd1779df6d63887146ec3de97/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/81439468615186",
       "universeId": 9745521731,
-      "peakCCU": 235
+      "peakCCU": 243
     },
     {
       "name": "Jump to Become Sniper",
-      "visits": 8386217,
-      "playing": 117,
+      "visits": 8387153,
+      "playing": 130,
       "groupName": "Brain Trip Studio",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-4dcdc0d9ab5c5836b88b65ad16ee21a9/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/99322840010644",
@@ -277,8 +277,8 @@
     },
     {
       "name": "Brainrot Board Game",
-      "visits": 5778358,
-      "playing": 141,
+      "visits": 5779118,
+      "playing": 125,
       "groupName": "Punchline Lite",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-836eb76bff08b8134099657ac28e9224/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/80368164055187",
@@ -287,8 +287,8 @@
     },
     {
       "name": "Survive 100 Days in Worm Maze",
-      "visits": 5476207,
-      "playing": 2,
+      "visits": 5476308,
+      "playing": 9,
       "groupName": "Mission Of Future",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-56686f3a45e13dd32c791fe03ab89ca7/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/132351984442703",
@@ -297,8 +297,8 @@
     },
     {
       "name": "Brainrot Stairs Escape",
-      "visits": 3331347,
-      "playing": 18,
+      "visits": 3331461,
+      "playing": 15,
       "groupName": "Ultra Crabers",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-c8e026ef248dcf5dc5126d8432ed5c2c/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/135310639182190",
@@ -307,7 +307,7 @@
     },
     {
       "name": "Last At The Top - Win",
-      "visits": 3285595,
+      "visits": 3285596,
       "playing": 0,
       "groupName": "Punchline Ultra",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-f6bb59ddc076b7b75435c9cd3cb7bc0f/768/432/Image/Png/noFilter",
@@ -317,8 +317,8 @@
     },
     {
       "name": "100 Players Enter Hungry Worm",
-      "visits": 3237155,
-      "playing": 159,
+      "visits": 3238006,
+      "playing": 161,
       "groupName": "Brain Trip Studio",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-335ba8bbddee76a944b2044431d7a6fd/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/95922389638607",
@@ -327,8 +327,8 @@
     },
     {
       "name": "Glass Bridge to Be Sniper",
-      "visits": 3118046,
-      "playing": 109,
+      "visits": 3118835,
+      "playing": 128,
       "groupName": "Brain Trip Studio",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-577c1cee46892f44124b83e71fef4f0b/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/105770464154933",
@@ -337,8 +337,8 @@
     },
     {
       "name": "Troll Maze 🖐",
-      "visits": 2979937,
-      "playing": 29,
+      "visits": 2980166,
+      "playing": 23,
       "groupName": "Bum Bun Games",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-f2d71a830e94de2a2736eac783b82960/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/113902683163012",
@@ -357,8 +357,8 @@
     },
     {
       "name": "Giant Cooking [2 Player Obby]",
-      "visits": 2019655,
-      "playing": 13,
+      "visits": 2019764,
+      "playing": 4,
       "groupName": "Punchline Team",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-6be80d5addae5398e2ab9754f3cea227/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/102667902818240",
@@ -367,17 +367,17 @@
     },
     {
       "name": "Build to Become Tank",
-      "visits": 1948667,
-      "playing": 47,
+      "visits": 1948881,
+      "playing": 58,
       "groupName": "Brain Trip Studio",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-978703b94437a10fc0a13b903e9e37af/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/98171439054005",
       "universeId": 10047169785,
-      "peakCCU": 55
+      "peakCCU": 58
     },
     {
       "name": "Brainrot Horror Maze [100 Players]",
-      "visits": 1470405,
+      "visits": 1470406,
       "playing": 0,
       "groupName": "Mission Of Future",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-1be23d6def80238e9c641de185397149/768/432/Image/Png/noFilter",
@@ -387,7 +387,7 @@
     },
     {
       "name": "Troll Elevator 😈",
-      "visits": 1448122,
+      "visits": 1448123,
       "playing": 0,
       "groupName": "Mission Of Future",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-0a72681d245a37aedc4866e85eace523/768/432/Image/Png/noFilter",
@@ -397,8 +397,8 @@
     },
     {
       "name": "+1 Speed Longest Brainrot Tunnel",
-      "visits": 1407386,
-      "playing": 0,
+      "visits": 1407388,
+      "playing": 1,
       "groupName": "Ultra Crabers",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-3d2ffeda198ca2d40d94d126690795ed/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/133209054156971",
@@ -407,8 +407,8 @@
     },
     {
       "name": "Become a Giant Tsunami",
-      "visits": 1395935,
-      "playing": 22,
+      "visits": 1396069,
+      "playing": 24,
       "groupName": "PunchLineX Studio",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-fa0fb60e48e491fac0b78d57b66f572e/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/70544192400346",
@@ -417,8 +417,8 @@
     },
     {
       "name": "100 Players Inside KPop Demon Hunters",
-      "visits": 1185001,
-      "playing": 2,
+      "visits": 1185031,
+      "playing": 0,
       "groupName": "Brain Trip Studio",
       "thumbnailUrl": "https://tr.rbxcdn.com/180DAY-de1afb39c3a2cf15e01e6ba40cde5a22/768/432/Image/Png/noFilter",
       "gameUrl": "https://www.roblox.com/games/93595107233464",
