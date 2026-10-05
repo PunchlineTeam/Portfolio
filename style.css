@@ -139,6 +139,121 @@ h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5vw, 
 .reveal { opacity: 0; translate: 0 26px; transition: opacity .6s ease, translate .6s ease; }
 .reveal.in { opacity: 1; translate: 0 0; }
 
+/* ===== Effects (fx.js toggles the fx-* classes on <html>) ===== */
+
+/* Cursor (Kenney Cursor Pack, CC0): outlined arrow, pointing hand on anything
+   clickable, and the hand balls into a fist while pressed. The 2x images keep
+   edges crisp on high-density screens; the plain url() line is the fallback. */
+.fx-cursor-fist, .fx-cursor-fist * {
+  cursor: url("materials/cursor-arrow.png") 9 7, auto;
+  cursor: image-set(url("materials/cursor-arrow.png") 1x, url("materials/cursor-arrow@2x.png") 2x) 9 7, auto;
+}
+.fx-cursor-fist :is(a, button, label, .card, .lang-btn), .fx-cursor-fist :is(a, button, label, .card) * {
+  cursor: url("materials/cursor-point.png") 10 3, pointer;
+  cursor: image-set(url("materials/cursor-point.png") 1x, url("materials/cursor-point@2x.png") 2x) 10 3, pointer;
+}
+.fx-cursor-fist.fx-pressing, .fx-cursor-fist.fx-pressing * {
+  cursor: url("materials/cursor-fist.png") 10 3, pointer;
+  cursor: image-set(url("materials/cursor-fist.png") 1x, url("materials/cursor-fist@2x.png") 2x) 10 3, pointer;
+}
+.fx-cursor-fist :is(input, textarea), .fx-cursor-fist.fx-pressing :is(input, textarea) { cursor: text; }
+
+/* Animated cursor element (fx.js) replaces the image cursors once it's running */
+.fx-cursor-js, .fx-cursor-js * { cursor: none !important; }
+.fx-cursor-js :is(input, textarea) { cursor: text !important; }
+.fx-cursor { position: fixed; left: 0; top: 0; z-index: 1000; pointer-events: none; will-change: transform; }
+.fx-cursor.hidden { opacity: 0; }
+.fx-cursor img { display: block; width: 32px; height: 32px; transform-origin: 50% 60%; }
+/* Wind up, punch forward, settle */
+.fx-cursor.punch img { animation: fx-punch .3s ease-out; }
+@keyframes fx-punch {
+  0% { scale: .82; rotate: 16deg; translate: 5px 5px; }
+  35% { scale: 1.5; rotate: -14deg; translate: -6px -7px; }
+  65% { scale: .94; rotate: 4deg; translate: 0 0; }
+  100% { scale: 1; rotate: 0deg; translate: 0 0; }
+}
+.fx-bit-ring { position: fixed; z-index: 100; pointer-events: none; width: 44px; height: 44px; margin: -22px 0 0 -22px; border: 3px solid var(--ink); border-radius: 50%; animation: fx-ring .4s ease-out forwards; }
+@keyframes fx-ring { from { scale: .2; opacity: 1; } to { scale: 1.3; opacity: 0; } }
+
+.fx-bit-star, .fx-bit-word, .fx-bit-confetti { position: fixed; z-index: 100; pointer-events: none; }
+.fx-bit-star { width: 14px; height: 14px; margin: -7px 0 0 -7px; clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); animation: fx-star .55s cubic-bezier(.2, .8, .3, 1) forwards; }
+@keyframes fx-star { from { scale: .4; } to { translate: var(--dx) var(--dy); scale: 1.1; rotate: 140deg; opacity: 0; } }
+.fx-bit-word { font: 400 22px var(--display); color: var(--ink); padding: 6px 12px 8px; border: var(--line); border-radius: 12px; box-shadow: 4px 4px 0 var(--ink); white-space: nowrap; transform: translate(-50%, -125%) rotate(var(--r)); animation: fx-word .75s ease-out forwards; }
+@keyframes fx-word { 0% { scale: .2; } 30% { scale: 1.15; } 45% { scale: 1; } 75% { opacity: 1; } 100% { opacity: 0; translate: 0 -18px; } }
+.fx-bit-confetti { width: 10px; height: 14px; margin: -7px 0 0 -5px; border: 2px solid var(--ink); border-radius: 2px; animation: fx-confetti 1.4s cubic-bezier(.2, .7, .4, 1) forwards; }
+@keyframes fx-confetti { 40% { translate: calc(var(--dx) * .7) var(--dy); } 100% { translate: var(--dx) calc(var(--dy) + 460px); rotate: var(--rot); opacity: 0; } }
+
+/* Intro: the first screen assembles itself. Fill mode "backwards" leaves
+   translate/rotate free afterwards for parallax and wobble. */
+.fx-intro .nav { animation: fx-navdrop .5s ease-out backwards; }
+.fx-intro h1 > span { display: inline-block; animation: fx-slap .65s cubic-bezier(.34, 1.56, .64, 1) backwards; }
+.fx-intro h1 > span:nth-of-type(1) { animation-delay: .1s; }
+.fx-intro h1 > span:nth-of-type(2) { animation-delay: .24s; }
+.fx-intro h1 > span:nth-of-type(3) { animation-delay: .36s; }
+.fx-intro h1 > span:nth-of-type(4) { animation-delay: .5s; }
+.fx-intro .hero-lead { animation: fx-rise .6s .65s ease-out backwards; }
+.fx-intro .hero-ctas { animation: fx-rise .6s .78s ease-out backwards; }
+.fx-intro .frame { animation: fx-drop .8s .25s cubic-bezier(.34, 1.4, .64, 1) backwards; }
+.fx-intro .st-visits { animation: fx-pop .5s .95s cubic-bezier(.34, 1.56, .64, 1) backwards; }
+.fx-intro .st-hit { animation: fx-pop .5s 1.1s cubic-bezier(.34, 1.56, .64, 1) backwards; }
+.fx-intro .marquee { animation: fx-rise .6s 1.15s ease-out backwards; }
+@keyframes fx-navdrop { from { translate: 0 -100%; } }
+@keyframes fx-slap { from { opacity: 0; scale: 1.7; translate: 0 -24px; } }
+@keyframes fx-rise { from { opacity: 0; translate: 0 18px; } }
+@keyframes fx-drop { from { opacity: 0; translate: 0 -90px; rotate: 9deg; } }
+@keyframes fx-pop { from { scale: 0; } }
+
+/* Hero art: slow camera push-in, plus a glare that sweeps across the frame now and then */
+.fx-heroart .frame { position: relative; }
+.fx-heroart .frame img { transform-origin: 58% 45%; animation: fx-kenburns 22s ease-in-out infinite alternate; }
+/* Parallax shifts the art up to ~8px sideways and 3% of the frame height + 5px vertically; this overscan keeps the edges hidden. */
+.fx-parallax .frame img { scale: 1.1; }
+.fx-heroart .frame::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, .5) 50%, transparent 62%); translate: -130% 0; animation: fx-glare 7s 2.2s ease-in-out infinite; }
+@keyframes fx-kenburns { from { scale: 1.1; } to { scale: 1.18; translate: -1.5% 1%; } }
+@keyframes fx-glare { 0%, 72% { translate: -130% 0; } 100% { translate: 130% 0; } }
+
+/* Idle wobble of the hero stickers */
+.fx-wobble .st-visits { animation: fx-wobble 3.4s ease-in-out infinite; }
+.fx-wobble .st-hit { animation: fx-wobble 4s .6s ease-in-out infinite reverse; }
+.fx-intro.fx-wobble .st-visits { animation: fx-pop .5s .95s cubic-bezier(.34, 1.56, .64, 1) backwards, fx-wobble 3.4s 1.5s ease-in-out infinite; }
+.fx-intro.fx-wobble .st-hit { animation: fx-pop .5s 1.1s cubic-bezier(.34, 1.56, .64, 1) backwards, fx-wobble 4s 1.7s ease-in-out infinite reverse; }
+.fx-wobble .star { display: inline-block; animation: fx-spin 5s linear infinite; }
+@keyframes fx-wobble { 0%, 100% { rotate: -3deg; } 50% { rotate: 3deg; } }
+@keyframes fx-spin { to { rotate: 360deg; } }
+
+/* 3D tilt toward the cursor (fx.js sets --rx/--ry) */
+.fx-tilt .card:hover { transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translate(-3px, -4px); transition: transform .1s, box-shadow .15s; }
+
+/* Stat tiles land with a squash */
+.fx-stomp .stat.reveal { transition: none; }
+.fx-stomp .stat.reveal.in { animation: fx-stomp .6s cubic-bezier(.3, 1.5, .6, 1) backwards; }
+.fx-stomp .stat:nth-child(2).in { animation-delay: .09s; }
+.fx-stomp .stat:nth-child(3).in { animation-delay: .18s; }
+.fx-stomp .stat:nth-child(4).in { animation-delay: .27s; }
+@keyframes fx-stomp { 0% { opacity: 0; translate: 0 -70px; scale: 1.2; } 65% { opacity: 1; translate: 0 0; scale: 1.08 .9; } 82% { scale: .97 1.04; } 100% { scale: 1; } }
+
+/* Headings bounce in letter by letter */
+.fx-letter { display: inline-block; }
+.fx-letters-go .fx-letter { animation: fx-letter .5s cubic-bezier(.34, 1.56, .64, 1) backwards; animation-delay: calc(var(--i) * 35ms); }
+@keyframes fx-letter { from { opacity: 0; translate: 0 .5em; rotate: 12deg; } }
+
+/* Scroll-driven marquee: fx.js moves the track itself */
+.fx-marquee .marquee-track { animation: none; }
+
+/* Demo panel (?demo) */
+.fx-panel { position: fixed; right: 16px; bottom: 16px; z-index: 90; width: 300px; background: var(--white); color: var(--ink); border: var(--line); border-radius: 16px; box-shadow: var(--shadow); font: 500 14px var(--body); }
+.fx-panel-head { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: var(--line); font-family: var(--display); font-size: 16px; }
+.fx-panel-head b { font-weight: 400; }
+.fx-panel-head button { border: 2px solid var(--ink); background: var(--yellow); border-radius: 8px; width: 28px; height: 28px; font-weight: 800; cursor: pointer; }
+.fx-panel-body { padding: 8px 14px 14px; max-height: 62vh; overflow: auto; }
+.fx-panel.collapsed .fx-panel-body { display: none; }
+.fx-panel label { display: flex; gap: 8px; align-items: center; padding: 3px 0; cursor: pointer; }
+.fx-panel input { accent-color: var(--red); width: 16px; height: 16px; }
+.fx-panel-label { margin: 8px 0 2px; font-weight: 800; }
+.fx-panel-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.fx-panel-actions button { border: 2px solid var(--ink); border-radius: 8px; background: var(--paper); padding: 5px 9px; font-weight: 700; cursor: pointer; }
+.fx-panel-note { color: #C0261B; margin: 8px 0 0; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .marquee-track { animation: none; }
@@ -166,6 +281,7 @@ h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5vw, 
   .section, .join { padding: 72px 0; }
   .section-games { padding-top: 0; }
   .form { padding: 22px; }
+  .fx-panel { left: 8px; right: 8px; bottom: 8px; width: auto; }
   .marquee span { font-size: 20px; }
   .st-hit { font-size: 14px; padding: 10px 14px; }
 }
