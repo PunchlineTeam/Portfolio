@@ -17,7 +17,20 @@ const GROUPS = [
   { name: "Mission Of Future", id: 35962840 },
 ];
 
-function fetch(url) {
+// Roblox rate-limits (429) bursts of requests. Retry with backoff before giving up.
+async function fetch(url, attempts = 4) {
+  for (let i = 1; ; i++) {
+    try {
+      return await fetchOnce(url);
+    } catch (e) {
+      if (i >= attempts) throw e;
+      console.warn(`    Retry ${i}/${attempts - 1} after: ${e.message.slice(0, 120)}`);
+      await sleep(2000 * 2 ** (i - 1));
+    }
+  }
+}
+
+function fetchOnce(url) {
   return new Promise((resolve, reject) => {
     https
       .get(url, { headers: { "User-Agent": "PunchlineUpdater/1.0" } }, (res) => {
@@ -94,6 +107,10 @@ async function main() {
 
   const allGames = [];
   const groupNameMap = {};
+  // A partial snapshot must never be written: on 2026-08-21 a run that lost most
+  // groups to 429s committed 13 of 42 games, and the next run dropped the
+  // peakCCU records of every missing game. Collect failures and abort instead.
+  const failures = [];
 
   for (const group of GROUPS) {
     console.log(`  Fetching games for ${group.name} (${group.id})...`);
@@ -106,6 +123,7 @@ async function main() {
       console.log(`    Found ${games.length} games`);
     } catch (e) {
       console.error(`    Error fetching group ${group.name}: ${e.message}`);
+      failures.push(`games of ${group.name}`);
     }
     await sleep(300);
   }
@@ -165,23 +183,36 @@ async function main() {
       totalMembers += info.memberCount || 0;
     } catch (e) {
       console.error(`    Error fetching members for ${group.name}: ${e.message}`);
+      failures.push(`members of ${group.name}`);
     }
     await sleep(300);
   }
   console.log(`Total members across all groups: ${totalMembers}`);
+
+  if (failures.length) {
+    throw new Error(`Incomplete data (${failures.join(", ")}); keeping the previous snapshot`);
+  }
 
   // Load existing data to preserve peakCCU records
   const fs = require("fs");
   const path = require("path");
   const outPath = path.join(__dirname, "..", "games-data.json");
   let existingPeaks = {};
+  let existing = null;
   try {
-    const existing = JSON.parse(fs.readFileSync(outPath, "utf8"));
+    existing = JSON.parse(fs.readFileSync(outPath, "utf8"));
     for (const g of existing.games) {
       if (g.peakCCU) existingPeaks[g.universeId] = g.peakCCU;
     }
   } catch (e) {
     // No existing data, start fresh
+  }
+
+  // Visits only ever grow, so a noticeable drop means some data went missing.
+  if (existing && totalVisits < existing.totalVisits * 0.98) {
+    throw new Error(
+      `Total visits dropped from ${existing.totalVisits} to ${totalVisits}; keeping the previous snapshot`
+    );
   }
 
   // Set peakCCU: keep existing record if higher, otherwise use current playing
