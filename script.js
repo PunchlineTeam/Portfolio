@@ -372,18 +372,44 @@ function initReveal() {
   });
 }
 
-function countUp(el, target, format) {
+// While counting, keep the final value's unit and decimal places ("0,00 млрд" →
+// "1,49 млрд"): switching from "млн" to "млрд" or from "0,4" to "0,41" mid-way
+// re-wrapped the text and made the tiles jump.
+function countFormat(target, format) {
+  if (format !== fmtShort || target < 1e6) return format;
+  const ru = currentLang === "ru";
+  const [div, unit] = target >= 1e9 ? [1e9, ru ? " млрд" : "B"] : [1e6, ru ? " млн" : "M"];
+  const decimals = (format(target).match(/[.,](\d+)/) || ["", ""])[1].length;
+  return (n) => {
+    const s = (n / div).toFixed(decimals);
+    return (ru ? s.replace(".", ",") : s) + unit;
+  };
+}
+
+// getFormat is re-read every frame, so a language switch mid-count still applies.
+function countUp(el, target, getFormat) {
   if (reduceMotion) {
-    el.textContent = format(target);
+    el.textContent = getFormat()(target);
     return;
   }
-  const duration = 1600;
+  // A hidden copy of the final value reserves its space, so the tile never resizes while counting.
+  el.innerHTML = '<span class="count-final" aria-hidden="true"></span><span class="count-live"></span>';
+  const [ghost, live] = el.children;
+  // Fill both right away: empty spans for even one frame collapse the tile.
+  ghost.textContent = getFormat()(target);
+  live.textContent = countFormat(target, getFormat())(0);
+  const duration = 2000;
   const start = performance.now();
   function tick(now) {
-    const p = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - p, 3);
-    el.textContent = format(p < 1 ? Math.floor(target * eased) : target);
+    if (!live.isConnected) return; // re-rendered meanwhile (language switch)
+    const format = getFormat();
+    // The frame timestamp can predate `start` slightly; unclamped, the first frame went negative ("-0,00").
+    const p = Math.min(Math.max((now - start) / duration, 0), 1);
+    const eased = 1 - Math.pow(1 - p, 4); // ease-out quart: brisk start, long soft landing
+    ghost.textContent = format(target);
+    live.textContent = countFormat(target, format)(target * eased);
     if (p < 1) requestAnimationFrame(tick);
+    else el.textContent = format(target);
   }
   requestAnimationFrame(tick);
 }
@@ -396,8 +422,7 @@ function initCountUp() {
       statsCounted = true;
       document.querySelectorAll("[data-count]").forEach((el) => {
         const [value] = STAT_VALUES[el.dataset.count]();
-        // Re-read the formatter on every frame so a language switch mid-animation still applies.
-        countUp(el, value, (v) => STAT_VALUES[el.dataset.count]()[1](v));
+        countUp(el, value, () => STAT_VALUES[el.dataset.count]()[1]);
       });
     },
     { threshold: 0.3 }
@@ -438,6 +463,7 @@ function initContactForm() {
     if (empty.length) {
       error.textContent = t("formInvalid");
       form.elements[empty[0]].focus();
+      document.dispatchEvent(new CustomEvent("punchline:form-error"));
       return;
     }
 
@@ -462,6 +488,7 @@ function initContactForm() {
     } catch (err) {
       console.error("Form send failed:", err);
       error.textContent = t("formError");
+      document.dispatchEvent(new CustomEvent("punchline:form-error"));
       label.textContent = t("formSubmit");
     } finally {
       submit.disabled = false;

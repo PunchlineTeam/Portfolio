@@ -13,8 +13,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Onest:wght@400;500;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20261005-5" />
-  <script src="fx.js?v=20261005-5"></script>
+  <link rel="stylesheet" href="style.css?v=20261005-20" />
+  <script src="fx.js?v=20261005-20"></script>
 </head>
 <body>
   <nav class="nav" id="nav">
@@ -28,6 +28,10 @@
       <div class="lang" role="group" aria-label="Language">
         <button class="lang-btn active" data-lang="ru">RU</button><button class="lang-btn" data-lang="en">EN</button>
       </div>
+      <button class="sound-btn" id="soundBtn" type="button" aria-pressed="true" aria-label="Звук / Sound" title="Звук / Sound">
+        <svg class="ico-on" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <svg class="ico-off" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </button>
       <a class="btn btn-red nav-cta" href="#join" data-i18n="navCta">Вступить</a>
     </div>
   </nav>
@@ -126,6 +130,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261005-5"></script>
+  <script src="script.js?v=20261005-20"></script>
+  <script src="sfx.js?v=20261005-20"></script>
 </body>
 </html>

@@ -47,6 +47,11 @@ button { font: inherit; color: inherit; }
 .lang-btn { background: none; border: 0; font-weight: 800; padding: 6px 10px; cursor: pointer; }
 .lang-btn.active { background: var(--ink); color: var(--paper); }
 .nav-cta { padding: 11px 18px; font-size: 15px; box-shadow: 4px 4px 0 var(--ink); }
+.sound-btn { width: 40px; height: 40px; display: grid; place-items: center; background: var(--white); border: var(--line); border-radius: 10px; cursor: pointer; padding: 0; transition: transform .12s; }
+.sound-btn:hover { transform: rotate(-6deg); }
+.sound-btn .ico-off, .sound-btn.off .ico-on { display: none; }
+.sound-btn.off .ico-off { display: block; }
+.sound-btn.off { background: var(--paper); color: #8A8170; }
 
 /* Hero */
 .hero { padding: 64px 0 76px; }
@@ -79,10 +84,14 @@ h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5vw, 
 
 /* Stats */
 .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
-.stat { border: var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 26px 24px 22px; }
+.stat { border: var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 26px 24px 22px; container-type: inline-size; }
 .stat:nth-child(odd) { transform: rotate(-1.2deg); }
 .stat:nth-child(even) { transform: rotate(1deg); }
-.stat b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(34px, 3.8vw, 52px); line-height: 1.02; margin-bottom: 10px; }
+/* Sized to the tile (cqw), so a long number like "40 500" never runs into the edge */
+/* nowrap: digits differ in width, so a counting value like "0,02 млрд" could wrap where "1,49 млрд" didn't */
+.stat b { display: grid; font-family: var(--display); font-weight: 400; font-size: clamp(28px, 17cqw, 52px); line-height: 1.02; margin-bottom: 10px; white-space: nowrap; }
+.stat b > span { grid-area: 1 / 1; }
+.stat b .count-final { visibility: hidden; }
 .stat span { font-weight: 700; }
 .s1 { background: var(--yellow); } .s2 { background: var(--pink); } .s3 { background: var(--blue); color: var(--white); } .s4 { background: var(--green); }
 
@@ -237,6 +246,96 @@ h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5vw, 
 .fx-letters-go .fx-letter { animation: fx-letter .5s cubic-bezier(.34, 1.56, .64, 1) backwards; animation-delay: calc(var(--i) * 35ms); }
 @keyframes fx-letter { from { opacity: 0; translate: 0 .5em; rotate: 12deg; } }
 
+/* Stat tiles: a one-off glare after landing, and they straighten up and lift on hover */
+/* (transition re-declared on .reveal so it beats the stomp effect's "transition: none") */
+.fx-tiles .stat, .fx-tiles .stat.reveal { position: relative; overflow: hidden; transition: transform .2s, box-shadow .2s; }
+.fx-tiles .stat:nth-child(2) { --n: 1; } .fx-tiles .stat:nth-child(3) { --n: 2; } .fx-tiles .stat:nth-child(4) { --n: 3; }
+.fx-tiles .stat::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .55) 50%, transparent 65%); translate: -130% 0; }
+.fx-tiles .stat.in::after { animation: fx-tile-glare 1s ease-in-out; animation-delay: calc(.7s + var(--n, 0) * .1s); }
+/* Hover glare is a transition (not an animation) so it never replays the landing glare */
+.fx-tiles .stat:hover::after { translate: 130% 0; transition: translate .8s ease-in-out; }
+.fx-tiles .stat:hover { transform: rotate(0deg) translate(-3px, -4px); box-shadow: 10px 10px 0 var(--ink); }
+.fx-tiles .stat:hover b { animation: fx-jiggle .45s ease-in-out; }
+@keyframes fx-tile-glare { from { translate: -130% 0; } to { translate: 130% 0; } }
+@keyframes fx-jiggle { 25% { rotate: -4deg; scale: 1.06; } 60% { rotate: 3deg; } 100% { rotate: 0deg; scale: 1; } }
+
+/* Game cards are dealt in left to right, then the rank badge pops */
+.fx-deal .card.reveal { transition: transform .15s, box-shadow .15s; }
+.fx-deal .card:nth-child(4n+1) { --col: 0; } .fx-deal .card:nth-child(4n+2) { --col: 1; }
+.fx-deal .card:nth-child(4n+3) { --col: 2; } .fx-deal .card:nth-child(4n) { --col: 3; }
+.fx-deal .card.reveal.in { animation: fx-deal .65s cubic-bezier(.3, 1.35, .6, 1) backwards; animation-delay: calc(var(--col) * 90ms); }
+.fx-deal .card.reveal.in .rank { animation: fx-pop .4s cubic-bezier(.34, 1.56, .64, 1) backwards; animation-delay: calc(var(--col) * 90ms + .4s); }
+.fx-deal .card:hover .pill { animation: fx-jiggle .45s ease-in-out; }
+@keyframes fx-deal { from { opacity: 0; translate: 0 70px; rotate: -10deg; scale: .85; } }
+
+/* "Our hits" idle motion: halftone dots drift behind the cards, and the cards breathe */
+.fx-bgdots .section-games { position: relative; overflow: hidden; }
+.fx-bgdots .section-games > .wrap { position: relative; z-index: 1; }
+/* Comic halftone dots drifting diagonally; the drift equals one dot period, so it loops seamlessly */
+.fx-bgdots .section-games::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: radial-gradient(rgba(21, 21, 21, .13) 2.2px, transparent 2.8px); background-size: 28px 28px; mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent); animation: fx-dots 5s linear infinite; }
+@keyframes fx-dots { to { background-position: 28px 28px; } }
+/* Cards breathe: a slight bob and sway, each on its own beat (after the deal-in, if that's on) */
+.fx-cardbob .card:nth-child(5n+1) { --bob: 0; } .fx-cardbob .card:nth-child(5n+2) { --bob: 1; } .fx-cardbob .card:nth-child(5n+3) { --bob: 2; }
+.fx-cardbob .card:nth-child(5n+4) { --bob: 3; } .fx-cardbob .card:nth-child(5n) { --bob: 4; }
+.fx-cardbob .card:nth-child(odd) { --sway: 1; } .fx-cardbob .card:nth-child(even) { --sway: -1; }
+/* The bob starts from rest (0 → -6px → 0), so it never jumps in; with the deal-in on,
+   it waits until the card has landed — otherwise it would override the fly-in. */
+.fx-cardbob .card.reveal.in { animation: fx-bob calc(4s + var(--bob) * .5s) ease-in-out infinite; animation-delay: calc(var(--bob) * .35s); }
+.fx-cardbob.fx-deal .card.reveal.in { animation: fx-deal .65s cubic-bezier(.3, 1.35, .6, 1) backwards, fx-bob calc(4s + var(--bob) * .5s) ease-in-out infinite; animation-delay: calc(var(--col) * 90ms), calc(.75s + var(--col) * 90ms + var(--bob) * .35s); }
+.fx-cardbob .card:hover { animation-play-state: paused; } /* holds still under the 3D tilt */
+@keyframes fx-bob { 0%, 100% { translate: 0 0; rotate: 0deg; } 50% { translate: 0 -6px; rotate: calc(.6deg * var(--sway)); } }
+
+/* "Hiring" section */
+.fx-join .join { position: relative; overflow: hidden; }
+.fx-join .join-row { position: relative; z-index: 1; }
+.fx-shape { position: absolute; z-index: 0; pointer-events: none; opacity: .18; translate: -50% -50%; animation: fx-float calc(9s + var(--i) * 1.7s) ease-in-out infinite alternate; animation-delay: calc(var(--i) * -2.3s); }
+.fx-shape-star { background: var(--white); clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+.fx-shape-ring { border: 14px solid var(--white); border-radius: 50%; }
+.fx-shape-dot { background: var(--yellow); border-radius: 50%; opacity: .3; }
+.fx-shape-plus { background: var(--white); clip-path: polygon(38% 0, 62% 0, 62% 38%, 100% 38%, 100% 62%, 62% 62%, 62% 100%, 38% 100%, 38% 62%, 0 62%, 0 38%, 38% 38%); }
+@keyframes fx-float { from { transform: translateY(-18px) rotate(-12deg); } to { transform: translateY(18px) rotate(14deg); } }
+.fx-join .join .hl-y { animation: fx-wobble 3.2s ease-in-out infinite; }
+.fx-join .role:nth-child(1) { --i: 0; } .fx-join .role:nth-child(2) { --i: 1; } .fx-join .role:nth-child(3) { --i: 2; }
+.fx-join .role:nth-child(4) { --i: 3; } .fx-join .role:nth-child(5) { --i: 4; } .fx-join .role:nth-child(6) { --i: 5; }
+.fx-join .join-text.in .role { animation: fx-chip .45s cubic-bezier(.34, 1.56, .64, 1) backwards; animation-delay: calc(var(--i) * 70ms + .25s); }
+/* Hover is a transition: swapping the animation would replay the pop-in on mouse-out */
+.fx-join .role { transition: translate .15s, scale .15s, rotate .15s; }
+.fx-join .role:hover { translate: 0 -5px; scale: 1.06; rotate: 3deg; }
+@keyframes fx-chip { from { opacity: 0; scale: .3; rotate: -20deg; } }
+/* Steps: a dashed trail draws down, then each number lights up in turn */
+.fx-join .steps { position: relative; }
+.fx-join .steps::before { content: ""; position: absolute; left: 17px; top: 18px; bottom: 18px; border-left: 3px dashed var(--yellow); transform-origin: top; scale: 1 0; }
+.fx-join .join-text.in .steps::before { animation: fx-trail .9s .7s ease-out forwards; }
+.fx-join .steps li { position: relative; }
+.fx-join .steps b { position: relative; z-index: 1; } /* numbers sit on top of the trail */
+.fx-join .steps li:nth-child(1) { --i: 0; } .fx-join .steps li:nth-child(2) { --i: 1; }
+.fx-join .steps li:nth-child(3) { --i: 2; } .fx-join .steps li:nth-child(4) { --i: 3; }
+.fx-join .join-text.in .steps li { animation: fx-step-in .4s ease-out backwards; animation-delay: calc(var(--i) * .22s + .7s); }
+.fx-join .join-text.in .steps b { animation: fx-pop .4s cubic-bezier(.34, 1.56, .64, 1) backwards; animation-delay: calc(var(--i) * .22s + .8s); }
+@keyframes fx-trail { to { scale: 1 1; } }
+@keyframes fx-step-in { from { opacity: 0; translate: -18px 0; } }
+.fx-join .form.reveal { transition: none; }
+.fx-join .form.reveal.in { animation: fx-form-in .75s cubic-bezier(.3, 1.3, .6, 1) backwards .15s; }
+@keyframes fx-form-in { from { opacity: 0; translate: 80px 10px; rotate: 7deg; } }
+.fx-join .field label { transition: translate .2s; }
+.fx-join .field:hover label { translate: 4px 0; }
+.fx-join .field:focus-within label { translate: 6px 0; }
+/* Fields lift like stickers: a little on hover, more while typing */
+.fx-join .field :is(input, textarea) { transition: translate .15s, box-shadow .15s, background-color .2s; }
+.fx-join .field :is(input, textarea):hover { translate: -2px -2px; box-shadow: 4px 4px 0 var(--ink); }
+.fx-join .field :is(input, textarea):focus { translate: -3px -3px; box-shadow: 6px 6px 0 var(--ink); background-color: #FFFBEA; }
+
+/* Footer wordmark: letters rise in, hop on hover, squash when punched */
+.fx-footer .bigword { display: flex; }
+.fx-footer .bigword span { display: inline-block; opacity: 0; translate: 0 .5em; transition: opacity .4s, translate .6s cubic-bezier(.34, 1.56, .64, 1), color .2s; transition-delay: calc(var(--i) * 60ms); }
+.fx-footer .bigword.fx-go span { opacity: 1; translate: 0 0; }
+.fx-footer .bigword.fx-risen span { transition-delay: 0s; transition-duration: .2s; }
+.fx-footer .bigword.fx-go span:hover { translate: 0 -.12em; color: var(--pink); transition-delay: 0s; transition-duration: .2s; }
+.fx-footer .bigword span.fx-hit { animation: fx-squash .4s ease-out; }
+@keyframes fx-squash { 0% { scale: 1.25 .7; } 45% { scale: .9 1.15; } 70% { scale: 1.05 .95; } 100% { scale: 1; } }
+.fx-footer .foot-links a { border-bottom-color: transparent; background: linear-gradient(var(--paper), var(--paper)) left bottom / 0 2px no-repeat; transition: background-size .3s; }
+.fx-footer .foot-links a:hover, .fx-footer .foot-links a:focus-visible { background-size: 100% 2px; }
+
 /* Scroll-driven marquee: fx.js moves the track itself */
 .fx-marquee .marquee-track { animation: none; }
 
@@ -253,7 +352,6 @@ h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5vw, 
 .fx-panel-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .fx-panel-actions button { border: 2px solid var(--ink); border-radius: 8px; background: var(--paper); padding: 5px 9px; font-weight: 700; cursor: pointer; }
 .fx-panel-note { color: #C0261B; margin: 8px 0 0; }
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .marquee-track { animation: none; }

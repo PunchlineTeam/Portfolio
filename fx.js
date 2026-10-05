@@ -10,8 +10,14 @@ const FX_LIST = [
   ["stomp", "Плитки цифр «приземляются»"],
   ["parallax", "Параллакс: стикеры и картинка в рамке"],
   ["letters", "Заголовки подпрыгивают по буквам"],
+  ["tiles", "Плитки цифр: блик и отклик на наведение"],
+  ["deal", "Карточки игр раздаются как колода"],
+  ["join", "«Ищем таланты»: фон, стикеры, шаги, форма"],
+  ["footer", "Буквы PUNCHLINE в подвале оживают"],
   ["wobble", "Стикеры покачиваются"],
   ["confetti", "Конфетти после отправки заявки"],
+  ["bgdots", "Фон игр: плывущие комикс-точки"],
+  ["cardbob", "Карточки игр «дышат»"],
 ];
 const FX_CURSORS = [
   ["default", "Обычный"],
@@ -80,7 +86,7 @@ function burstWord(x, y) {
    element that follows the mouse 1:1 (no easing, so it never lags). On press
    the hand balls into a fist and punches. The CSS image cursors under
    .fx-cursor-fist stay as the fallback until this takes over. */
-const CLICKABLE = "a, button, label, .card, .lang-btn";
+const CLICKABLE = "a, button, .card, .lang-btn, .bigword span"; // footer letters are punchable
 const CURSOR_SRC = {
   arrow: "materials/cursor-arrow@2x.png",
   point: "materials/cursor-point@2x.png",
@@ -132,7 +138,7 @@ function initCursor() {
     pressed = true;
     root.classList.add("fx-pressing");
     update();
-    if (fx.reduced || inField) return;
+    if (fx.reduced || inField || e.target.closest(".field")) return; // the form stays calm, labels included
     el.classList.remove("punch");
     void el.offsetWidth; // restart the punch on rapid clicks
     el.classList.add("punch");
@@ -272,6 +278,49 @@ function initLetters() {
   document.querySelectorAll("h2").forEach((h) => io.observe(h));
 }
 
+/* ----- "Hiring" section: drifting shapes behind the content ----- */
+function initJoinDecor() {
+  if (!fx.on("join")) return;
+  const join = document.querySelector(".join");
+  const shapes = [
+    ["star", 9, 14, 120, 0],
+    ["ring", 82, 10, 150, 1],
+    ["plus", 46, 78, 90, 2],
+    ["dot", 92, 72, 70, 3],
+    ["star", 3, 82, 80, 4],
+    ["ring", 60, 4, 60, 5],
+  ];
+  shapes.forEach(([kind, left, top, size, i]) => {
+    const s = document.createElement("span");
+    s.className = `fx-shape fx-shape-${kind}`;
+    s.setAttribute("aria-hidden", "true");
+    Object.assign(s.style, { left: left + "%", top: top + "%", width: size + "px", height: size + "px", "--i": i });
+    join.prepend(s);
+  });
+}
+
+/* ----- Footer wordmark: letters rise in, hop on hover, squash when punched ----- */
+function initFooterLetters() {
+  if (!fx.on("footer")) return;
+  const word = document.querySelector(".bigword");
+  word.innerHTML = [...word.textContent.trim()].map((ch, i) => `<span style="--i:${i}">${ch}</span>`).join("");
+  new IntersectionObserver((entries, io) => {
+    if (!entries[0].isIntersecting) return;
+    io.disconnect();
+    word.classList.add("fx-go");
+    // Once every letter has risen, drop the per-letter stagger so hover reacts instantly.
+    setTimeout(() => word.classList.add("fx-risen"), 1300);
+  }, { threshold: 0.4 }).observe(word);
+  word.addEventListener("pointerdown", (e) => {
+    const letter = e.target.closest("span");
+    if (!letter) return;
+    letter.classList.remove("fx-hit");
+    void letter.offsetWidth; // restart on repeated punches
+    letter.classList.add("fx-hit");
+  });
+  word.addEventListener("animationend", (e) => e.target.classList.remove("fx-hit"));
+}
+
 /* ----- Confetti ----- */
 function confetti(fromEl) {
   const r = fromEl.getBoundingClientRect();
@@ -341,6 +390,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initMarquee();
   initParallax();
   initLetters();
+  initJoinDecor();
+  initFooterLetters();
   initConfetti();
   initDemoPanel();
 });
