@@ -296,12 +296,41 @@ function renderDynamic() {
 }
 
 /* ===== LANGUAGE ===== */
-function setLanguage(lang) {
+// Russian for visitors from the CIS, English for everyone else. A language the
+// visitor picked by hand (saved in localStorage) always wins.
+const CIS_LANGS = ["ru", "be", "kk", "ky", "uz", "tg", "hy", "az", "tk"];
+const CIS_REGIONS = ["RU", "BY", "KZ", "KG", "UZ", "TJ", "AM", "AZ", "MD", "TM"];
+const CIS_TIMEZONES = [
+  "Europe/Moscow", "Europe/Kaliningrad", "Europe/Samara", "Europe/Volgograd", "Europe/Saratov",
+  "Europe/Ulyanovsk", "Europe/Astrakhan", "Europe/Kirov", "Europe/Minsk", "Europe/Chisinau",
+  "Asia/Yekaterinburg", "Asia/Omsk", "Asia/Novosibirsk", "Asia/Barnaul", "Asia/Tomsk",
+  "Asia/Novokuznetsk", "Asia/Krasnoyarsk", "Asia/Irkutsk", "Asia/Chita", "Asia/Yakutsk",
+  "Asia/Khandyga", "Asia/Vladivostok", "Asia/Ust-Nera", "Asia/Magadan", "Asia/Sakhalin",
+  "Asia/Srednekolymsk", "Asia/Kamchatka", "Asia/Anadyr", "Asia/Almaty", "Asia/Qostanay",
+  "Asia/Aqtobe", "Asia/Aqtau", "Asia/Atyrau", "Asia/Oral", "Asia/Qyzylorda", "Asia/Bishkek",
+  "Asia/Tashkent", "Asia/Samarkand", "Asia/Dushanbe", "Asia/Yerevan", "Asia/Baku", "Asia/Ashgabat",
+];
+
+function detectLanguage() {
+  // The browser's main language decides; e.g. "ru", "kk-KZ", or "en-KZ" (English UI in Kazakhstan).
+  const [lang = "", region = ""] = (navigator.languages?.[0] || navigator.language || "").split("-");
+  if (CIS_LANGS.includes(lang.toLowerCase()) || CIS_REGIONS.includes(region.toUpperCase())) return "ru";
+  // An English browser with a CIS time zone is most likely someone from the CIS too.
+  let zone = "";
+  try {
+    zone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  } catch {}
+  return CIS_TIMEZONES.includes(zone) ? "ru" : "en";
+}
+
+function setLanguage(lang, { remember = true } = {}) {
   currentLang = lang;
   document.documentElement.lang = lang;
-  try {
-    localStorage.setItem("punchline-lang", lang);
-  } catch {}
+  if (remember) {
+    try {
+      localStorage.setItem("punchline-lang", lang);
+    } catch {}
+  }
   document.querySelectorAll(".lang-btn").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.lang === lang);
   });
@@ -424,6 +453,7 @@ function initContactForm() {
       if (!res.ok) throw new Error("HTTP " + res.status);
       form.reset();
       form.classList.add("sent");
+      document.dispatchEvent(new CustomEvent("punchline:form-sent", { detail: { from: submit } }));
       label.textContent = t("formSuccess");
       setTimeout(() => {
         form.classList.remove("sent");
@@ -457,7 +487,10 @@ async function init() {
   try {
     savedLang = localStorage.getItem("punchline-lang");
   } catch {}
-  setLanguage(savedLang === "en" ? "en" : "ru");
+  // Only a hand-picked language is remembered, so auto-detection keeps working
+  // for visitors who never touched the switch.
+  if (savedLang === "ru" || savedLang === "en") setLanguage(savedLang);
+  else setLanguage(detectLanguage(), { remember: false });
 
   document.getElementById("year").textContent = new Date().getFullYear();
   document.querySelectorAll(".lang-btn").forEach((btn) => {
