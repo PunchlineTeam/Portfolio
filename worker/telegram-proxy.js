@@ -1,13 +1,17 @@
-// Cloudflare Worker — proxy for the "join the team" form on the Punchline site.
+// Cloudflare Worker for the Punchline site.
 //
-// Why: the site is static (GitHub Pages), so anything in script.js is public.
-// The bot token must NOT live in the client. This Worker holds the token as a
-// secret and forwards submissions to Telegram server-side.
+//   POST /       — "join the team" form proxy. The site is static (GitHub Pages),
+//                  so anything in script.js is public; the bot token must NOT live
+//                  in the client. This Worker holds it as a secret and forwards
+//                  submissions to Telegram server-side.
+//   GET  /stats  — live Roblox stats (see stats.js).
 //
 // Configure (see worker/README.md):
 //   Secret:    TELEGRAM_BOT_TOKEN   (wrangler secret put TELEGRAM_BOT_TOKEN)
 //   Variable:  TELEGRAM_CHAT_ID     (e.g. -5189423412)
 //   Variable:  ALLOWED_ORIGIN       (e.g. https://punchlineteam.github.io)
+
+import { handleStats } from "./stats.js";
 
 const MAX = { name: 100, contact: 200, role: 100, message: 2000 };
 
@@ -15,6 +19,20 @@ export default {
   async fetch(request, env) {
     const allowed = env.ALLOWED_ORIGIN || "*";
     const origin = request.headers.get("Origin") || "";
+
+    if (new URL(request.url).pathname === "/stats") {
+      const statsCors = { "Access-Control-Allow-Origin": allowed };
+      if (request.method !== "GET") {
+        return json({ ok: false, error: "method not allowed" }, 405, statsCors);
+      }
+      try {
+        return await handleStats(statsCors);
+      } catch (e) {
+        console.error("stats failed:", e);
+        return json({ ok: false, error: "stats unavailable" }, 502, statsCors);
+      }
+    }
+
     const cors = {
       "Access-Control-Allow-Origin": allowed,
       "Access-Control-Allow-Methods": "POST, OPTIONS",

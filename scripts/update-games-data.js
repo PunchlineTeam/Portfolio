@@ -197,6 +197,10 @@ async function main() {
     totalGames: games.length,
     totalGroups: GROUPS.length,
     games,
+    // Every game (incl. <1M visits) → group. The live stats Worker refreshes
+    // visits/playing for all of them in one batch call, since listing group games
+    // per request gets rate-limited by Roblox.
+    universeGroups: groupNameMap,
   };
 
   fs.writeFileSync(outPath, JSON.stringify(output, null, 2) + "\n");

@@ -496,27 +496,40 @@ function initClipboard() {
   }
 }
 /* ===== INIT ===== */
-async function init() {
-  // Load data — pull the latest committed file straight from the repo so stats
-  // stay fresh on every visit. The hourly updater commits to master, but the
-  // GitHub Pages deploy can lag far behind (bot commits don't trigger a redeploy),
-  // so the deployed games-data.json may be stale. raw.githubusercontent.com always
-  // serves the newest commit and allows CORS. Fall back to the local copy if needed.
-  const RAW_DATA_URL =
-    "https://raw.githubusercontent.com/PunchlineTeam/Portfolio/master/games-data.json";
+const STATS_ENDPOINT = "https://punchline-form-proxy.punchlineteam.workers.dev/stats";
+
+async function fetchJSON(url, timeoutMs) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
-    const res = await fetch(RAW_DATA_URL + "?v=" + Date.now(), { cache: "no-store" });
+    const res = await fetch(url, { cache: "no-store", signal: ctrl.signal });
     if (!res.ok) throw new Error("HTTP " + res.status);
-    gamesData = await res.json();
-  } catch (e) {
-    console.warn("Falling back to local game data:", e);
+    return await res.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function init() {
+  // Load data, freshest source first:
+  //   1. Live stats from the Worker (queries Roblox on request, ~1 min cache).
+  //   2. The latest committed snapshot from the repo (the cron only manages to run
+  //      every few hours, and the Pages deploy can lag behind it).
+  //   3. The copy deployed alongside this page.
+  const sources = [
+    STATS_ENDPOINT,
+    "https://raw.githubusercontent.com/PunchlineTeam/Portfolio/master/games-data.json?v=" + Date.now(),
+    "games-data.json?v=" + Date.now(),
+  ];
+  for (const url of sources) {
     try {
-      const res = await fetch("games-data.json?v=" + Date.now(), { cache: "no-store" });
-      gamesData = await res.json();
-    } catch (e2) {
-      console.error("Failed to load game data:", e2);
+      gamesData = await fetchJSON(url, 6000);
+      break;
+    } catch (e) {
+      console.warn("Stats source failed, trying next:", url, e);
     }
   }
+  if (!gamesData) console.error("Failed to load game data from all sources");
 
   // Init language
   let savedLang = null;
