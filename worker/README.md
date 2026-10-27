@@ -33,6 +33,7 @@ using a token stored as a server-side secret.
 
 ## Notes
 
-- `TELEGRAM_CHAT_ID` and `ALLOWED_ORIGIN` live in `wrangler.toml`. Update
-  `ALLOWED_ORIGIN` if the site moves to a custom domain (origin only, no path).
+- `TELEGRAM_CHAT_ID` and `ALLOWED_ORIGIN` live in `wrangler.toml`.
+  `ALLOWED_ORIGIN` is a comma-separated list of origins (no path): the
+  `punchlineteam.com` domain, its `www`, and the old `punchlineteam.github.io`.
 - A hidden `website` honeypot field blocks basic spam bots.

@@ -9,7 +9,8 @@
 // Configure (see worker/README.md):
 //   Secret:    TELEGRAM_BOT_TOKEN   (wrangler secret put TELEGRAM_BOT_TOKEN)
 //   Variable:  TELEGRAM_CHAT_ID     (e.g. -5189423412)
-//   Variable:  ALLOWED_ORIGIN       (e.g. https://punchlineteam.github.io)
+//   Variable:  ALLOWED_ORIGIN       comma-separated origins, e.g.
+//                                   "https://punchlineteam.com,https://punchlineteam.github.io"
 
 import { handleStats } from "./stats.js";
 
@@ -17,11 +18,15 @@ const MAX = { name: 100, contact: 200, role: 100, message: 2000 };
 
 export default {
   async fetch(request, env) {
-    const allowed = env.ALLOWED_ORIGIN || "*";
+    const origins = (env.ALLOWED_ORIGIN || "*").split(",").map((o) => o.trim()).filter(Boolean);
+    const anyOrigin = origins.includes("*");
     const origin = request.headers.get("Origin") || "";
+    // CORS allows a single origin per response, so echo the caller's when it's on the list.
+    const allowed = anyOrigin ? "*" : origins.includes(origin) ? origin : origins[0];
+    const vary = anyOrigin ? {} : { Vary: "Origin" };
 
     if (new URL(request.url).pathname === "/stats") {
-      const statsCors = { "Access-Control-Allow-Origin": allowed };
+      const statsCors = { "Access-Control-Allow-Origin": allowed, ...vary };
       if (request.method !== "GET") {
         return json({ ok: false, error: "method not allowed" }, 405, statsCors);
       }
@@ -37,6 +42,7 @@ export default {
       "Access-Control-Allow-Origin": allowed,
       "Access-Control-Allow-Methods": "POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
+      ...vary,
     };
 
     if (request.method === "OPTIONS") {
