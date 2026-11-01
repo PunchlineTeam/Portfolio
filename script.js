@@ -116,7 +116,10 @@ let statsCounted = false;
 
 /* ===== FORMATTING ===== */
 function trimNum(x, digits) {
-  const s = x.toFixed(digits).replace(/\.?0+$/, "");
+  // Drop trailing zeros only after a decimal point: "96.50" → "96.5", "10.0" → "10".
+  // Unanchored, the regex also ate zeros of whole numbers ("120" → "12").
+  let s = x.toFixed(digits);
+  if (s.includes(".")) s = s.replace(/\.?0+$/, "");
   return currentLang === "ru" ? s.replace(".", ",") : s;
 }
 
