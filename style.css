@@ -139,10 +139,6 @@ h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5vw, 
 .footer { background: var(--ink); color: var(--paper); padding: 64px 0 40px; overflow: hidden; }
 .bigword { font-family: var(--display); font-size: clamp(40px, 11.2vw, 150px); line-height: .9; margin: 0 0 40px; color: var(--yellow); }
 .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; font-weight: 700; }
-.foot-links { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; }
-.foot-links a { border-bottom: 2px solid var(--paper); }
-.copy { background: none; border: 2px solid var(--paper); border-radius: 10px; padding: 6px 12px; font-weight: 800; color: var(--paper); cursor: pointer; }
-.copy:hover { background: var(--paper); color: var(--ink); }
 
 /* Reveal on scroll */
 .reveal { opacity: 0; translate: 0 26px; transition: opacity .6s ease, translate .6s ease; }
@@ -333,8 +329,6 @@ h2 { font-family: var(--display); font-weight: 400; font-size: clamp(40px, 5vw, 
 .fx-footer .bigword.fx-go span:hover { translate: 0 -.12em; color: var(--pink); transition-delay: 0s; transition-duration: .2s; }
 .fx-footer .bigword span.fx-hit { animation: fx-squash .4s ease-out; }
 @keyframes fx-squash { 0% { scale: 1.25 .7; } 45% { scale: .9 1.15; } 70% { scale: 1.05 .95; } 100% { scale: 1; } }
-.fx-footer .foot-links a { border-bottom-color: transparent; background: linear-gradient(var(--paper), var(--paper)) left bottom / 0 2px no-repeat; transition: background-size .3s; }
-.fx-footer .foot-links a:hover, .fx-footer .foot-links a:focus-visible { background-size: 100% 2px; }
 
 /* Scroll-driven marquee: fx.js moves the track itself */
 .fx-marquee .marquee-track { animation: none; }

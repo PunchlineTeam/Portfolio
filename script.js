@@ -41,12 +41,10 @@ const translations = {
     formSubmit: "Отправить заявку",
     formSending: "Отправляем…",
     formSuccess: "Заявка отправлена!",
-    formError: "Не получилось отправить. Попробуй ещё раз или напиши нам в Discord.",
+    formError: "Не получилось отправить. Попробуй ещё раз чуть позже.",
     formInvalid: "Заполни все поля.",
     formNote: "Без обязательств. Ответ в течение 48 часов.",
     footerRights: "Все права защищены.",
-    footerDiscord: "Discord-сервер",
-    copySuccess: "Скопировано!",
     loadError: "Не удалось загрузить игры. Обнови страницу чуть позже.",
   },
   en: {
@@ -90,12 +88,10 @@ const translations = {
     formSubmit: "Send application",
     formSending: "Sending…",
     formSuccess: "Application sent!",
-    formError: "Couldn't send it. Try again or message us on Discord.",
+    formError: "Couldn't send it. Please try again in a bit.",
     formInvalid: "Fill in all fields.",
     formNote: "No strings attached. We reply within 48 hours.",
     footerRights: "All rights reserved.",
-    footerDiscord: "Discord server",
-    copySuccess: "Copied!",
     loadError: "Couldn't load games. Refresh in a bit.",
   },
 };
@@ -499,18 +495,6 @@ function initContactForm() {
   });
 }
 
-/* ===== DISCORD TAG ===== */
-function initClipboard() {
-  const btn = document.getElementById("copyDiscord");
-  btn.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(btn.dataset.tag);
-      btn.textContent = t("copySuccess");
-      setTimeout(() => (btn.textContent = btn.dataset.tag), 2000);
-    } catch {}
-  });
-}
-
 /* ===== INIT ===== */
 async function init() {
   let savedLang = null;
@@ -529,7 +513,6 @@ async function init() {
   initReveal();
   initShowAll();
   initContactForm();
-  initClipboard();
 
   gamesData = await loadData();
   if (!gamesData) {
